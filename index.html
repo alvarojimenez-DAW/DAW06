@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban DAW06</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/estils.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">DAW06</p>
+      <h1>Gestor Kanban</h1>
+    </div>
+    <button id="netejarFiltres" class="secondary-button" type="button">Netejar filtres</button>
+  </header>
+
+  <main class="app-shell">
+    <aside class="control-panel" aria-label="Formulari, filtres i estadistiques">
+      <section class="panel-section" aria-labelledby="form-title">
+        <h2 id="form-title">Tasca</h2>
+        <form id="tascaForm" novalidate>
+          <input type="hidden" id="tascaId">
+
+          <div class="field">
+            <label for="titol">Titol *</label>
+            <input id="titol" name="titol" type="text" maxlength="80" required>
+            <p id="errorTitol" class="error-message" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="descripcio">Descripcio</label>
+            <textarea id="descripcio" name="descripcio" rows="4" maxlength="350"></textarea>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="prioritat">Prioritat</label>
+              <select id="prioritat" name="prioritat">
+                <option value="baixa">Baixa</option>
+                <option value="mitjana">Mitjana</option>
+                <option value="alta">Alta</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="dataVenciment">Data limit</label>
+              <input id="dataVenciment" name="dataVenciment" type="date">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="estat">Estat</label>
+            <select id="estat" name="estat">
+              <option value="perFer">Per fer</option>
+              <option value="enCurs">En curs</option>
+              <option value="fet">Fet</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button id="submitButton" class="primary-button" type="submit">Afegir tasca</button>
+            <button id="cancelEditButton" class="secondary-button hidden" type="button">Cancel.lar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel-section" aria-labelledby="filters-title">
+        <h2 id="filters-title">Filtres</h2>
+        <div class="field">
+          <label for="cerca">Cerca</label>
+          <input id="cerca" type="search" placeholder="Titol o descripcio">
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="filtreEstat">Estat</label>
+            <select id="filtreEstat">
+              <option value="tots">Tots</option>
+              <option value="perFer">Per fer</option>
+              <option value="enCurs">En curs</option>
+              <option value="fet">Fet</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="filtrePrioritat">Prioritat</label>
+            <select id="filtrePrioritat">
+              <option value="totes">Totes</option>
+              <option value="baixa">Baixa</option>
+              <option value="mitjana">Mitjana</option>
+              <option value="alta">Alta</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-section" aria-labelledby="stats-title">
+        <h2 id="stats-title">Estadistiques globals</h2>
+        <dl class="stats-grid">
+          <div>
+            <dt>Total</dt>
+            <dd id="statTotal">0</dd>
+          </div>
+          <div>
+            <dt>Per fer</dt>
+            <dd id="statPerFer">0</dd>
+          </div>
+          <div>
+            <dt>En curs</dt>
+            <dd id="statEnCurs">0</dd>
+          </div>
+          <div>
+            <dt>Fetes</dt>
+            <dd id="statFet">0</dd>
+          </div>
+          <div class="wide-stat">
+            <dt>Completades</dt>
+            <dd id="statPercent">0%</dd>
+          </div>
+        </dl>
+      </section>
+    </aside>
+
+    <section class="board-area" aria-labelledby="board-title">
+      <div class="board-heading">
+        <h2 id="board-title">Tauler Kanban</h2>
+        <p id="resultatsFiltre" aria-live="polite">0 tasques visibles</p>
+      </div>
+
+      <section class="kanban-board" id="kanbanBoard" aria-label="Columnes del tauler Kanban">
+        <article class="kanban-column" data-status="perFer">
+          <header>
+            <h3>Per fer</h3>
+            <span id="count-perFer" class="column-count">0</span>
+          </header>
+          <div id="column-perFer" class="task-list" aria-label="Tasques per fer"></div>
+        </article>
+
+        <article class="kanban-column" data-status="enCurs">
+          <header>
+            <h3>En curs</h3>
+            <span id="count-enCurs" class="column-count">0</span>
+          </header>
+          <div id="column-enCurs" class="task-list" aria-label="Tasques en curs"></div>
+        </article>
+
+        <article class="kanban-column" data-status="fet">
+          <header>
+            <h3>Fet</h3>
+            <span id="count-fet" class="column-count">0</span>
+          </header>
+          <div id="column-fet" class="task-list" aria-label="Tasques fetes"></div>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Aplicacio Kanban per a la practica DAW06. Les dades es desen al navegador amb localStorage.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
