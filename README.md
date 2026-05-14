@@ -35,8 +35,8 @@ README.md
 
 ## Enllacos
 
-- Repositori GitHub: pendent d'afegir quan es publiqui.
-- GitHub Pages: pendent d'afegir quan s'activi el desplegament.
+- Repositori GitHub: https://github.com/alvarojimenez-DAW/DAW06
+- GitHub Pages: https://alvarojimenez-daw.github.io/DAW06/
 
 ## Captures de pantalla
 
